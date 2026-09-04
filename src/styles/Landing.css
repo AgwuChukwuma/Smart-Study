@@ -1,0 +1,560 @@
+/* ─────────────────────────────────────────────
+   Smart Study — LandingPage.css
+   Class names match LandingPage.tsx exactly:
+   .wrapper  .hero-btns  .btn-hp  .btn-ho
+   .feat-grid  .feat-card  .card-icon etc.
+───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ── Reset ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── Theme tokens ────────────────────────────────────────────────── */
+.app.light {
+    --bg: #eef0ff;
+    --nav-bg: rgba(238, 240, 255, 0.88);
+    --card-bg: rgba(255, 255, 255, 0.78);
+    --card-hover: rgba(255, 255, 255, 0.97);
+    --card-border: rgba(180, 160, 240, 0.38);
+    --card-border-hover: rgba(124, 92, 252, 0.45);
+    --surface2: rgba(255, 255, 255, 0.55);
+    --border: rgba(180, 160, 240, 0.3);
+    --border2: rgba(124, 92, 252, 0.4);
+    --text-primary: #18123a;
+    --text-secondary: #6650a4;
+    --text-muted: #9e8ec8;
+    --accent: #7c5cfc;
+    --accent2: #00c896;
+    --accent-glow: rgba(124, 92, 252, 0.3);
+    --btn-outline-bg: rgba(124, 92, 252, 0.09);
+    --btn-outline-bd: rgba(124, 92, 252, 0.38);
+    --btn-outline-text: #7c5cfc;
+    --icon-bg: rgba(124, 92, 252, 0.1);
+    --icon-color: #7c5cfc;
+    --input-bg: rgba(255, 255, 255, 0.82);
+    --input-border: rgba(180, 160, 240, 0.38);
+    --shadow-card: 0 2px 16px rgba(100, 70, 200, 0.09), 0 1px 3px rgba(100, 70, 200, 0.06);
+    --shadow-hover: 0 8px 36px rgba(100, 70, 200, 0.18);
+    --mesh: radial-gradient(ellipse at 18% 22%, rgba(167, 139, 250, 0.38) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 12%, rgba(96, 165, 250, 0.26) 0%, transparent 48%),
+        radial-gradient(ellipse at 62% 82%, rgba(52, 211, 153, 0.22) 0%, transparent 48%),
+        radial-gradient(ellipse at 8% 82%, rgba(251, 146, 60, 0.14) 0%, transparent 44%);
+}
+
+.app.dark {
+    --bg: #080c1a;
+    --nav-bg: rgba(8, 12, 26, 0.92);
+    --card-bg: rgba(14, 20, 42, 0.88);
+    --card-hover: rgba(18, 28, 54, 0.97);
+    --card-border: rgba(0, 210, 165, 0.13);
+    --card-border-hover: rgba(0, 210, 165, 0.32);
+    --surface2: rgba(20, 28, 56, 0.6);
+    --border: rgba(0, 210, 165, 0.14);
+    --border2: rgba(0, 210, 165, 0.28);
+    --text-primary: #dde4f4;
+    --text-secondary: #7a8aaa;
+    --text-muted: #44506a;
+    --accent: #00d2a5;
+    --accent2: #7c5cfc;
+    --accent-glow: rgba(0, 210, 165, 0.28);
+    --btn-outline-bg: rgba(0, 210, 165, 0.08);
+    --btn-outline-bd: rgba(0, 210, 165, 0.32);
+    --btn-outline-text: #00d2a5;
+    --icon-bg: rgba(0, 210, 165, 0.1);
+    --icon-color: #00d2a5;
+    --input-bg: rgba(14, 20, 42, 0.82);
+    --input-border: rgba(0, 210, 165, 0.2);
+    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.38), 0 1px 3px rgba(0, 0, 0, 0.28);
+    --shadow-hover: 0 8px 36px rgba(0, 210, 165, 0.13);
+    --mesh: radial-gradient(ellipse at 15% 28%, rgba(0, 210, 165, 0.10) 0%, transparent 52%),
+        radial-gradient(ellipse at 84% 14%, rgba(124, 92, 252, 0.09) 0%, transparent 48%),
+        radial-gradient(ellipse at 68% 84%, rgba(30, 80, 200, 0.07) 0%, transparent 48%);
+}
+
+/* ── App shell ───────────────────────────────────────────────────── */
+.app {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    transition: background 0.25s, color 0.25s;
+}
+
+/* ── Background layers ───────────────────────────────────────────── */
+.bg-mesh {
+    position: fixed;
+    inset: 0;
+    background: var(--mesh);
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.25s;
+}
+
+.bg-dots {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.app.light .bg-dots {
+    opacity: 0;
+}
+
+.app.dark .bg-dots {
+    opacity: 1;
+    background-image: radial-gradient(circle, rgba(0, 210, 165, 0.22) 1px, transparent 1px);
+    background-size: 38px 38px;
+    mask-image: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0.5) 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 0.5) 0%, transparent 72%);
+}
+
+.network-svg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.app.light .network-svg {
+    opacity: 0;
+}
+
+.app.dark .network-svg {
+    opacity: 1;
+}
+
+/* ── Wrapper (content column) ────────────────────────────────────── */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ── Navbar ──────────────────────────────────────────────────────── */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 28px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background 0.25s, border-color 0.25s;
+    /* stretch navbar full width */
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: max(28px, calc(50vw - 550px));
+    padding-right: max(28px, calc(50vw - 550px));
+}
+
+.nav-search {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 20px;
+    padding: 7px 14px;
+    transition: border-color 0.2s;
+}
+
+.nav-search:focus-within {
+    border-color: var(--accent);
+}
+
+.nav-search svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.nav-search input {
+    background: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 12.5px;
+    color: var(--text-primary);
+    width: 130px;
+}
+
+.nav-search input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Logo — it's a <button> in the TSX */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--text-primary);
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-btn {
+    width: 34px;
+    height: 34px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.theme-btn:hover {
+    background: var(--card-hover);
+    border-color: var(--border2);
+}
+
+/* Sign Up (filled) */
+.btn-signup {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px var(--accent-glow);
+}
+
+.btn-signup:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Log In (outline) */
+.btn-login {
+    background: var(--btn-outline-bg);
+    color: var(--btn-outline-text);
+    border: 1px solid var(--btn-outline-bd);
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-login:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+/* ── Hero section ────────────────────────────────────────────────── */
+.hero {
+    text-align: center;
+    padding: 72px 20px 56px;
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-weight: 800;
+    line-height: 1.16;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.hero p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    line-height: 1.65;
+}
+
+/* hero button row — class is hero-btns in the TSX */
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* "Get Started" — class is btn-hp in the TSX */
+.btn-hp {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 18px var(--accent-glow);
+}
+
+.btn-hp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 26px var(--accent-glow);
+}
+
+/* "See How It Works" — class is btn-ho in the TSX */
+.btn-ho {
+    background: var(--btn-outline-bg);
+    color: var(--btn-outline-text);
+    border: 1px solid var(--btn-outline-bd);
+    padding: 12px 26px;
+    border-radius: 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.btn-ho:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* ── Features section ────────────────────────────────────────────── */
+.features {
+    padding: 0 20px 80px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* grid — class is feat-grid in the TSX */
+.feat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+/* card — class is feat-card in the TSX */
+.feat-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 22px;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    animation: fadeUp 0.45s ease forwards;
+}
+
+.feat-card:hover {
+    background: var(--card-hover);
+    border-color: var(--card-border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* shared card inner elements — these class names DO match the CSS you sent */
+.card-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--icon-bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: var(--icon-color);
+}
+
+.card-num {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.card-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.58;
+}
+
+/* ── Demo toggle inside card 5 ───────────────────────────────────── */
+.tog-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 11px;
+}
+
+.mini-tog {
+    width: 32px;
+    height: 18px;
+    border-radius: 9px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.mini-tog.off {
+    background: rgba(124, 92, 252, 0.22);
+}
+
+.mini-tog.on {
+    background: var(--accent);
+}
+
+.mini-tog::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    top: 3px;
+    transition: left 0.2s;
+}
+
+.mini-tog.off::after {
+    left: 3px;
+}
+
+.mini-tog.on::after {
+    left: 17px;
+}
+
+.tog-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: max(28px, calc(50vw - 550px));
+    padding-right: max(28px, calc(50vw - 550px));
+}
+
+.footer h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+    .feat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .navbar {
+        padding: 12px 16px;
+    }
+
+    .nav-search {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 16px 36px;
+    }
+
+    .features {
+        padding: 0 16px 52px;
+    }
+}
+
+@media (max-width: 480px) {
+    .feat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-login {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+}
