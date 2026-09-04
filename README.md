@@ -76,7 +76,6 @@ The frontend will run on `http://localhost:5173` (default Vite port) and talk to
 |-------------------|--------------------|---------------------------------------|
 | `GEMINI_API_KEY`   | `server/.env`      | API key for Google Gemini             |
 
-> **Never commit `.env` files, `users.json`, or `data.json` to version control.** These are already excluded via `.gitignore`.
 
 ## Deployment
 
