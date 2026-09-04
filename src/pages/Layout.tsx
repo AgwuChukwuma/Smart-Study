@@ -100,11 +100,6 @@ const CloseIcon = () => (
         <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
     </svg>
 )
-const PlusIcon = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="14" height="14">
-        <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-    </svg>
-)
 
 // ── Nav items ──────────────────────────────────
 const NAV_ITEMS = [
@@ -234,10 +229,6 @@ export function Topbar ({ title, actions }: { title?: string; actions?: React.Re
     const [showNotifs, setShowNotifs] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
 
-    const PAGE_SEARCH_MAP: Record<string, string> = {
-        "materials": "materials", "summaries": "summaries",
-        "quizzes": "quizzes", "collaborate": "collaborate",
-    }
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()

@@ -58,7 +58,7 @@ const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }>
 }
 
 export default function DashboardPage () {
-    const { user, materials, summaries, quizzes, navigate, theme } = useApp()
+    const { user, materials, summaries, quizzes, navigate } = useApp()
 
     const completedQuizzes = quizzes.filter(q => q.status === "completed")
     const avgScore = completedQuizzes.length

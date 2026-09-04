@@ -1,6 +1,5 @@
 // src/pages/CollaboratePage.tsx
 import { useState, useRef, useEffect } from "react"
-import { useApp } from "../context/AppContext"
 import { PageLayout } from "../pages/Layout"
 import "../styles/Collaborate.css"
 import "../styles/Layout.css"
@@ -330,7 +329,6 @@ function RoomCard ({ room, idx, onClick }: { room: Room; idx: number; onClick: (
 }
 
 export default function CollaboratePage () {
-    const { unreadCount } = useApp()
     const [rooms, setRooms] = useState(INITIAL_ROOMS)
     const [activeRoom, setActiveRoom] = useState<Room | null>(null)
     const [showNewRoom, setShowNewRoom] = useState(false)

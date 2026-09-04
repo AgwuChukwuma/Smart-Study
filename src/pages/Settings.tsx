@@ -32,7 +32,7 @@ const ACCENT_COLORS = [
     { label: "Orange", value: "#fb923c" },
 ]
 
-const SETTINGS_TABS: { key: SettingsTab; label: string; icon: JSX.Element }[] = [
+const SETTINGS_TABS: { key: SettingsTab; label: string; icon: React.ReactNode }[] = [
     { key: "profile", label: "Profile", icon: <UserIcon /> },
     { key: "appearance", label: "Appearance", icon: <PaletteIcon /> },
     { key: "notifications", label: "Notifications", icon: <BellIcon /> },

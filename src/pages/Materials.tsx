@@ -177,6 +177,7 @@ export default function MaterialsPage () {
                 hasQuiz: false,
                 color: SUBJECT_COLORS[subject] || "#7c5cfc",
                 file,
+                hasFlashcards: false
             })
         })
         showToast(`${files.length} file${files.length > 1 ? "s" : ""} uploaded successfully!`)
