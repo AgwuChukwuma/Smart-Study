@@ -17,7 +17,7 @@ const DATA_FILE = path.join(__dirname, "data.json");
 const USERS_FILE = path.join(__dirname, "users.json");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: ["https://lofty-smart-study.netlify.app", "http://localhost:5173"] }));
 app.use(express.json());
 
 const upload = multer({ storage: multer.memoryStorage() });
