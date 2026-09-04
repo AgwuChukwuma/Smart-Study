@@ -730,8 +730,7 @@ interface AppContextValue {
 const AppContext =
     createContext<AppContextValue | null>(null)
 
-const API_BASE = "https://smart-study-api-814t.onrender.com"
-
+const API_BASE = "https://smart-study-api-8l4t.onrender.com"
 // ── Provider ───────────────────────────────────────────────────────────────
 
 export function AppProvider ({
