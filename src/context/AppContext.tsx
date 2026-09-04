@@ -730,7 +730,7 @@ interface AppContextValue {
 const AppContext =
     createContext<AppContextValue | null>(null)
 
-const API_BASE = "http://localhost:3001"
+const API_BASE = "https://smart-study-api-814t.onrender.com"
 
 // ── Provider ───────────────────────────────────────────────────────────────
 
