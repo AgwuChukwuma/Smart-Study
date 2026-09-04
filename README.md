@@ -1,75 +1,92 @@
-# React + TypeScript + Vite
+# Smart Study
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered study assistant app built with a React (Vite) frontend and an Express backend, using the Google Gemini API.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Frontend**
+- React + Vite
+- TypeScript
 
-## React Compiler
+**Backend**
+- Node.js + Express
+- Google Gemini API
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
 ```
+smart-study/
+├── src/                # React frontend source
+├── public/              # Static assets
+├── server/              # Express backend
+│   ├── index.js
+│   └── package.json
+├── package.json         # Frontend package config
+└── README.md
+```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started (Local Development)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
+- Node.js (v18+ recommended)
+- A Gemini API key ([Google AI Studio](https://aistudio.google.com/))
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd smart-study
+```
+
+### 2. Set up the backend
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside `server/` with:
 
 ```
+GEMINI_API_KEY=your_actual_key_here
+```
+
+Start the backend:
+
+```bash
+node index.js
+```
+
+The server will run on `http://localhost:3001`.
+
+### 3. Set up the frontend
+
+In a new terminal, from the project root:
+
+```bash
+npm install
+npm run dev
+```
+
+The frontend will run on `http://localhost:5173` (default Vite port) and talk to the backend at `http://localhost:3001`.
+
+## Environment Variables
+
+| Variable          | Location          | Description                          |
+|-------------------|--------------------|---------------------------------------|
+| `GEMINI_API_KEY`   | `server/.env`      | API key for Google Gemini             |
+
+> **Never commit `.env` files, `users.json`, or `data.json` to version control.** These are already excluded via `.gitignore`.
+
+## Deployment
+
+This app is deployed as two separate services from a single repo:
+
+- **Frontend** → [Vercel](https://vercel.com) or [Netlify](https://netlify.com)
+- **Backend** → [Render](https://render.com) (or similar host that supports persistent Node servers)
+
+The frontend's `API_BASE` (in `src/context/AppContext.tsx`) points to the live backend URL in production and `http://localhost:3001` in development.
+
+## License
+
+This project currently has no license specified. All rights reserved unless otherwise stated.
